@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Match Skills</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <a id="topo"></a>
+    <nav class="navbar">
+        <div class="container">
+            <a href="/"><img src="img/logomatchskills1.svg" alt="Match Skills Logo" class="logo"></a>
+            <ul class="nav-links">
+                <li><a href="/buscar-vagas">Buscar Vagas</a></li>
+                <li><a href="/buscar-empresas">Buscar Empresas</a></li>
+                <li><a href="/sobre-nos">Sobre Nós</a></li>
+            </ul>
+            <div class="nav-user bigger-column-gap">
+                <a href="/login" class="btn btn-secondary">Login</a>
+                <a href="/cadastro" class="btn btn-primary">Cadastre-se</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="container" style="max-width: 500px;">
+            <div id="notification-container"></div>
+            <div class="card no-translateY">
+                <h1 class="page-title" style="text-align: center; font-size: 2rem;">Acesse sua conta</h1>
+                <p class="page-subtitle" style="text-align: center; margin-bottom: 30px;">Bem-vindo(a) de volta!</p>
+
+                <form>
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" placeholder="seu@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="senha">Senha</label>
+                        <input type="password" id="senha" placeholder="Sua senha" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Entrar como:</label>
+                        <div class="radio-group">
+                            <input type="radio" id="tipoCandidato" name="tipoLogin" value="candidato" checked>
+                            <label for="tipoCandidato">Candidato</label>
+                            <input type="radio" id="tipoEmpresa" name="tipoLogin" value="empresa">
+                            <label for="tipoEmpresa">Empresa</label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Entrar</button>
+
+                    <p style="text-align: center; margin-top: 20px;">
+                        Não tem uma conta? <a href="/cadastro">Cadastre-se aqui</a>.
+                    </p>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <a href="/"><img src="img/logomatchskills1.svg" alt="Match Skills Logo" class="logo"></a>
+            <p style="color: #ccc; font-size: 0.9rem;">© 2024 Match Skills. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+    
+    <script src="js/main.js"></script>
+    <script src="js/login.js"></script>
+</body>
+</html>

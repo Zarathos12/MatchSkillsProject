@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar Empresas - Match Skills</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <a id="topo"></a>
+    <nav class="navbar">
+        <div class="container">
+            <a href="/"><img src="img/logomatchskills1.svg" alt="Match Skills Logo" class="logo"></a>
+            <ul class="nav-links">
+                <li><a href="/">Início</a></li>
+                <li><a href="/buscar-vagas">Buscar Vagas</a></li>
+                <li><a href="/buscar-empresas">Buscar Empresas</a></li>
+                <li><a href="/sobre-nos">Sobre Nós</a></li>
+            </ul>
+            <!-- Estado Padrão: Não Logado -->
+            <div id="nav-user-default" class="nav-user bigger-column-gap">
+                <a href="/login" class="btn btn-secondary">Login</a>
+                <a href="/cadastro" class="btn btn-primary">Cadastre-se</a>
+            </div>
+            <!-- Estado Logado (escondido por padrão) -->
+            <div id="nav-user-logged" class="nav-user" style="display: none;">
+                <a href="/perfil"><img src="/img/fotos-perfil/candidato-sem-foto.png" alt="Foto de Perfil" class="profile-pic"></a>
+                <a href="#" class="logout-btn">Sair</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="container">
+            <h1 class="page-title">Encontre sua próxima empresa</h1>
+            <p class="page-subtitle">Pesquise por empresas que combinam com seu perfil e cultura.</p>
+
+            <div class="search-bar">
+                <input type="text" id="searchInput" class="form-group" placeholder="Digite o nome da empresa, ex: 'Empresa Tech'">
+                <button class="btn btn-primary">Buscar</button>
+            </div>
+
+            <section class="results-list">
+                <div class="card company-card premium">
+                    <img src="https://via.placeholder.com/100/ffd700/000?text=PREMIUM" alt="Logo Empresa" class="company-logo">
+                    <div class="company-info">
+                        <h3>Empresa Dourada (Premium)</h3>
+                        <p>Tecnologia e Inovação - São Paulo, SP</p>
+                    </div>
+                </div>
+
+                <div class="card company-card">
+                    <img src="https://via.placeholder.com/100/333333/FFFFFF?text=EMPRESA" alt="Logo Empresa" class="company-logo">
+                    <div class="company-info">
+                        <h3>Empresa Tech S/A</h3>
+                        <p>Software e Serviços - Remoto</p>
+                    </div>
+                </div>
+
+                <div class="card company-card">
+                    <img src="https://via.placeholder.com/100/666666/FFFFFF?text=INOVA" alt="Logo Empresa" class="company-logo">
+                    <div class="company-info">
+                        <h3>Inova Soluções</h3>
+                        <p>Consultoria e BI - Rio de Janeiro, RJ</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <a href="/"><img src="img/logomatchskills1.svg" alt="Match Skills Logo" class="logo"></a>
+            <ul class="footer-links">
+                <li><a href="/sobre-nos">Sobre Nós</a></li>
+                <li><a id="footer-profile-link" href="/login">Meu Perfil</a></li>
+                <li><a href="/">Início</a></li>
+                <li><a href="#topo">Voltar ao Topo</a></li>
+            </ul>
+        </div>
+    </footer>
+    
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const resultsList = document.querySelector('.results-list');
+            const searchButton = document.querySelector('.search-bar .btn-primary');
+            const searchInput = document.getElementById('searchInput');
+
+            const fetchAndDisplayCompanies = async (url) => {
+                resultsList.innerHTML = ''; // Limpa a lista de resultados
+
+                try {
+                    const response = await fetch(url);
+                    if (!response.ok) {
+                        result = await response.json();
+                        if (result.message.includes("Nenhuma")) {
+                            resultsList.innerHTML = `<p>${result.message}</p>`;
+                            return;
+                        }else{
+                            throw new Error('Erro ao buscar empresas');
+                        }
+                    }
+                    const empresas = await response.json();
+
+                    if (empresas.length > 0) {
+                        for (const empresa of empresas) {
+                            const companyCard = document.createElement('div');
+                            companyCard.classList.add('card', 'company-card');
+
+                            // Check for premium status from the fetched company data
+                            if (empresa.premium === 1) {
+                                companyCard.classList.add('premium');
+                            }
+
+
+                            const logo = document.createElement('img');
+                            logo.src = empresa.foto ? empresa.foto : 'img/fotos-perfil/empresa-sem-foto.png';
+                            logo.alt = `Logo ${empresa.razao_social}`;
+                            logo.classList.add('company-logo');
+
+                            const info = document.createElement('div');
+                            info.classList.add('company-info');
+
+                            const name = document.createElement('h3');
+                            name.textContent = empresa.razao_social;
+
+                            const details = document.createElement('p');
+                            details.textContent = `${empresa.site || 'Site não informado'}`;
+
+                            info.appendChild(name);
+                            info.appendChild(details);
+
+                            companyCard.appendChild(logo);
+                            companyCard.appendChild(info);
+
+                            companyCard.addEventListener('click', () => {
+                                window.location.href = `/ver-empresa?id=${empresa.id_empresa}`;
+                            });
+
+                            resultsList.appendChild(companyCard);
+                        }
+                    } else {
+                        resultsList.innerHTML = '<p>Nenhuma empresa encontrada.</p>';
+                    }
+                } catch (error) {
+                    console.error('Erro:', error);
+                    resultsList.innerHTML = '<p>Ocorreu um erro ao buscar as empresas. Tente novamente mais tarde.</p>';
+                }
+            };
+
+            // Clear input on page load
+            searchInput.value = '';
+
+
+            // Check for search term in URL on page load
+            const urlParams = new URLSearchParams(window.location.search);
+            const nomeParam = urlParams.get('nome');
+
+            if (nomeParam) {
+                searchInput.value = nomeParam;
+                fetchAndDisplayCompanies(`/api/empresas/buscar?nome=${encodeURIComponent(nomeParam)}`);
+            } else {
+                fetchAndDisplayCompanies('/api/empresas'); // Load all companies if no search term
+            }
+
+            // Filter companies by name on search button click
+            searchButton.addEventListener('click', () => {
+                const searchTerm = searchInput.value.trim();
+                if (searchTerm) {
+                    fetchAndDisplayCompanies(`/api/empresas/buscar?nome=${searchTerm}`);
+                } else {
+                    fetchAndDisplayCompanies('/api/empresas');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

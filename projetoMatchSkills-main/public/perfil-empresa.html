@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Perfil - Match Skills</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="notification-container"></div>
+    <a id="topo"></a>
+    <nav class="navbar">
+        <div class="container">
+            <a href="/home"><img src="img/logomatchskills1.svg" alt="Match Skills Logo" class="logo"></a>
+            <ul class="nav-links">
+                <li><a href="/home">Início</a></li>
+                <li><a href="/minhas-vagas">Minhas Vagas</a></li>
+                <li><a href="/sobre-nos">Sobre Nós</a></li>
+            </ul>
+            <!-- Estado Padrão: Não Logado -->
+            <div id="nav-user-default" class="nav-user bigger-column-gap" style="display: none;">
+                <a href="/login" class="btn btn-secondary">Login</a>
+                <a href="/cadastro" class="btn btn-primary">Cadastre-se</a>
+            </div>
+            <!-- Estado Logado (escondido por padrão) -->
+            <div id="nav-user-logged" class="nav-user">
+                <a href="/perfil"><img src="/img/fotos-perfil/empresa-sem-foto.png" alt="Foto de Perfil" class="profile-pic"></a>
+                <a href="#" class="logout-btn">Sair</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="profile-layout">
+                <aside class="profile-sidebar">
+                    <div class="profile-pic-container">
+                        <img src="/img/fotos-perfil/empresa-sem-foto.png" alt="Logo da Empresa" class="main-profile-pic" id="profilePic">
+                        <div class="edit-overlay">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+                        </div>
+                        <input type="file" id="profilePicInput" accept="image/*" style="display: none;">
+                    </div>
+                    <h2 id="companyName">Nome da Empresa</h2>
+                    <p class="join-date" id="joinDate">Membro desde...</p>
+                    <a href="#" class="btn btn-primary" id="editButton">Modificar Dados</a>
+                    <a href="/minhas-vagas" class="btn btn-secondary">Ver Minhas Vagas</a>                    
+                    <a href="#" class="btn btn-premium btn-secondary" id="becomePremiumBtn" data-modal-target="#premiumModal" style="display: none;">Tornar-se Premium</a>
+                    <a href="#" class="btn btn-danger" id="cancelPremiumBtn" style="display: none;">Deixar de Ser Premium</a>
+                </aside>
+
+                <section class="profile-content">
+                    <div class="card no-translateY">
+                        <h3>Informações da Conta</h3>
+                        <form id="profileForm">
+                            <div class="form-group">
+                                <label for="razaoSocial">Razão Social</label>
+                                <input type="text" id="razaoSocial" readonly>
+                            </div>
+                            <div class="profile-grid-two">
+                                <div class="form-group">
+                                    <label for="email">E-mail</label>
+                                    <input type="email" id="email" value="contato@empresatech.com" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cnpj">CNPJ</label>
+                                    <input type="text" id="cnpj" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="site">Site</label>
+                                <input type="text" id="site" readonly>
+                            </div>
+                            <div class="profile-grid-two">
+                                <div class="form-group">
+                                    <label for="setor">Setor</label>
+                                    <input type="text" id="setor" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="local">Local</label>
+                                    <input type="text" id="local" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="tamanho">Tamanho da Empresa</label>
+                                <select id="tamanho" disabled>
+                                    <option value="Pequena">Pequena (até 49 funcionários)</option>
+                                    <option value="Média">Média (50-499 funcionários)</option>
+                                    <option value="Grande">Grande (500+ funcionários)</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="descricao">Descrição da Empresa</label>
+                                <textarea id="descricao" readonly rows="4"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <a href="/home"><img src="img/logomatchskills1.svg" alt="Match Skills Logo" class="logo"></a>
+            <ul class="footer-links">
+                <li><a href="/sobre-nos">Sobre Nós</a></li>
+                <li><a id="footer-profile-link" href="/perfil">Meu Perfil</a></li>
+                <li><a href="/home">Início</a></li>
+                <li><a href="#topo">Voltar ao Topo</a></li>
+            </ul>
+        </div>
+    </footer>
+    
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+
+    <div class="confirmation-backdrop" id="confirmationBackdrop"></div>
+    <div class="confirmation-dialog" id="confirmationDialog">
+        <p class="confirmation-message">Você tem certeza?</p>
+        <div class="confirmation-buttons">
+            <button class="btn btn-secondary btn-cancel">Cancelar</button>
+            <button class="btn btn-danger btn-confirm">Confirmar</button>
+        </div>
+    </div>
+
+    <!-- Modal Premium -->
+    <div class="modal" id="premiumModal">
+        <div class="modal-header">
+            <h3>✨ Torne-se Premium</h3>
+            <button class="modal-close" data-modal-close>&times;</button>
+        </div>
+        <div class="modal-body">
+            <p class="page-subtitle" style="text-align: center; margin-bottom: 30px;">Aumente a visibilidade da sua empresa e atraia os melhores talentos!</p>
+            
+            <div class="premium-plans-container">
+                <!-- Plano Mensal -->
+                <div class="plan-card">
+                    <h4>Plano Mensal</h4>
+                    <p class="plan-price">R$ 30<span>/mês</span></p>
+                    <ul class="plan-benefits">
+                        <li><span class="check-icon">✔</span> Maior visibilidade nas buscas</li>
+                        <li><span class="check-icon">✔</span> Destaque nas listagens de vagas</li>
+                    </ul>
+                    <button class="btn btn-secondary select-plan-btn" data-plan="mensal">Selecionar Plano</button>
+                </div>
+
+                <!-- Plano Anual (Recomendado) -->
+                <div class="plan-card recommended">
+                    <div class="recommended-badge">Recomendado</div>
+                    <h4>Plano Anual</h4>
+                    <p class="plan-price">R$ 300<span>/ano</span></p>
+                    <ul class="plan-benefits">
+                        <li><span class="check-icon">✔</span> Maior visibilidade nas buscas</li>
+                        <li><span class="check-icon">✔</span> Destaque nas listagens de vagas</li>
+                        <li><span class="check-icon">✔</span> <strong>2 meses grátis!</strong></li>
+                    </ul>
+                    <button class="btn btn-primary select-plan-btn" data-plan="anual">Selecionar Plano</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script>
+        let usuario = null; // Será preenchido com os dados da sessão
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('profileForm');
+            const fields = form.querySelectorAll('input, textarea, select');
+            const editButton = document.getElementById('editButton');
+            const profilePicContainer = document.querySelector('.profile-pic-container');
+            const profilePicInput = document.getElementById('profilePicInput');
+            const profilePicImg = document.getElementById('profilePic');
+            const becomePremiumBtn = document.getElementById('becomePremiumBtn');
+            const cancelPremiumBtn = document.getElementById('cancelPremiumBtn');
+            const selectPlanBtns = document.querySelectorAll('.select-plan-btn');
+
+            let isEditMode = false;
+
+            // --- Inicializa a página buscando a sessão ---
+            async function initializeProfilePage() {
+                try {
+                    const sessionRes = await fetch('/usuarios/session');
+                    if (!sessionRes.ok) {
+                        window.location.href = '/login'; // Redireciona se não estiver logado
+                        return;
+                    }
+                    const { user } = await sessionRes.json();
+                    usuario = user; // Armazena os dados do usuário globalmente na página
+                    await loadProfileData();
+                    toggleEditState(); // Set initial readonly state
+                } catch (error) {
+                    console.error('Erro ao inicializar a página de perfil:', error);
+                    window.showNotification('Erro ao carregar sua sessão. Tente fazer login novamente.', 'error');
+                }
+            }
+
+            // --- Load initial data ---
+            async function loadProfileData() {
+                try {
+                    const res = await fetch(`/api/empresas/completo/${usuario.id}`);
+                    if (!res.ok) throw new Error('Empresa não encontrada.');
+                    
+                    const data = await res.json();
+                    const empresa = data[0];
+
+                    // Populate sidebar
+                    document.getElementById('companyName').textContent = empresa.razao_social;
+                    const joinDate = new Date(empresa.data_criacao).toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' });
+                    document.getElementById('joinDate').textContent = `Membro desde ${joinDate}`;
+                    profilePicImg.src = empresa.foto || '/img/fotos-perfil/empresa-sem-foto.png';
+
+                    // Populate form
+                    document.getElementById('razaoSocial').value = empresa.razao_social;
+                    document.getElementById('email').value = empresa.email;
+                    document.getElementById('cnpj').value = empresa.cnpj;
+                    document.getElementById('site').value = empresa.site || '';
+                    document.getElementById('setor').value = empresa.setor || '';
+                    document.getElementById('local').value = empresa.local || '';
+                    document.getElementById('tamanho').value = empresa.tamanho || 'Pequena';
+                    document.getElementById('descricao').value = empresa.descricao || '';
+
+                    await checkPremiumStatus();
+
+                } catch (error) {
+                    console.error('Erro ao carregar perfil:', error);
+                    window.showNotification('Não foi possível carregar os dados do perfil.', 'error');
+                }
+            }
+
+            // --- Check Premium Status and Update Buttons ---
+            async function checkPremiumStatus() {
+                try {
+                    const res = await fetch(`usuarios/api/usuarios/${usuario.id}/premium`);
+                    const data = await res.json();
+
+                    if (data.premium) {
+                        becomePremiumBtn.style.display = 'none';
+                        cancelPremiumBtn.style.display = 'block';
+                    } else {
+                        becomePremiumBtn.style.display = 'block';
+                        cancelPremiumBtn.style.display = 'none';
+                    }
+                } catch (error) {
+                    console.error('Erro ao verificar status premium:', error);
+                    window.showNotification('Não foi possível verificar o status da sua assinatura.', 'error');
+                }
+            }
+
+            // --- Toggle Edit Mode ---
+            editButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                isEditMode = !isEditMode;
+                toggleEditState();
+
+                if (!isEditMode) {
+                    // If switching from edit to view mode, it means "Salvar" was clicked
+                    submitForm();
+                }
+            });
+
+            function toggleEditState() {
+                fields.forEach(field => {
+                    if (field.tagName.toLowerCase() === 'select') {
+                        field.disabled = !isEditMode;
+                    } else {
+                        field.readOnly = !isEditMode;
+                    }
+                });
+
+                if (isEditMode) {
+                    editButton.textContent = 'Salvar Alterações';
+                    editButton.classList.remove('btn-primary');
+                    editButton.classList.add('btn-secondary');
+                } else {
+                    editButton.textContent = 'Modificar Dados';
+                    editButton.classList.add('btn-primary');
+                    editButton.classList.remove('btn-secondary');
+                }
+            }
+
+            // --- Profile Picture Upload ---
+            profilePicContainer.addEventListener('click', () => profilePicInput.click());
+
+            profilePicInput.addEventListener('change', async () => {
+                const file = profilePicInput.files[0];
+                if (!file) return;
+
+                const formData = new FormData();
+                formData.append('id_usuario', usuario.id);
+                formData.append('foto', file);
+
+                try {
+                    const res = await fetch(`/usuarios/atualizar-foto`, {
+                        method: 'PATCH',
+                        body: formData
+                    });
+
+                    const result = await res.json();
+                    if (res.ok) {
+                        profilePicImg.src = `/${result.foto_url}`;
+                        window.showNotification('Foto de perfil atualizada com sucesso!');
+                        // Atualiza a UI (incluindo a navbar) com os novos dados da sessão
+                        window.updateUIAfterLogin(result.user);
+                    } else {
+                        throw new Error(result.message || 'Falha ao atualizar a foto.');
+                    }
+                } catch (error) {
+                    console.error('Erro no upload da foto:', error);
+                    window.showNotification(`Falha ao salvar foto: ${error.message}`, 'error');
+                }
+            });
+
+            // --- Form Submission ---
+            async function submitForm() {
+                const data = {
+                    razao_social: document.getElementById('razaoSocial').value,
+                    email: document.getElementById('email').value,
+                    cnpj: document.getElementById('cnpj').value,
+                    site: document.getElementById('site').value,
+                    setor: document.getElementById('setor').value,
+                    local: document.getElementById('local').value,
+                    tamanho: document.getElementById('tamanho').value,
+                    descricao: document.getElementById('descricao').value,
+                };
+
+                try {
+                    const res = await fetch(`/api/empresas/${usuario.id}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
+
+                    if (!res.ok) {
+                        const errorData = await res.json();
+                        throw new Error(errorData.error || 'Falha ao atualizar os dados.');
+                    }
+
+                    window.showNotification('Dados atualizados com sucesso!');
+                    loadProfileData(); // Reload data to show changes
+                } catch (error) {
+                    console.error('Erro ao salvar alterações:', error);
+                    window.showNotification(`Falha ao salvar: ${error.message}`, 'error');
+                    // Revert button to edit state if save fails
+                    isEditMode = true; 
+                    toggleEditState();
+                }
+            }
+
+            // --- Premium Functionality ---
+            async function becomePremium() {
+                try {
+                    const res = await fetch(`usuarios/api/usuarios/${usuario.id}/tornar-premium`, {
+                        method: 'PATCH'
+                    });
+
+                    if (!res.ok) {
+                        const errorData = await res.json();
+                        throw new Error(errorData.error || 'Falha ao ativar o plano Premium.');
+                    }
+
+                    // Close modal
+                    const premiumModal = document.getElementById('premiumModal');
+                    closeModal(premiumModal);
+
+                    window.showNotification('Parabéns! Agora você é um usuário Premium', 'success');
+                    await checkPremiumStatus(); // Refresh buttons
+
+                } catch (error) {
+                    console.error('Erro ao tornar-se premium:', error);
+                    window.showNotification(`Falha ao ativar plano: ${error.message}`, 'error');
+                }
+            }
+
+            async function cancelPremium() {
+                const confirmed = await window.showConfirmationDialog('Tem certeza que deseja cancelar sua assinatura Premium? Sua visibilidade será reduzida.');
+
+                if (confirmed) {
+                    try {
+                        const res = await fetch(`usuarios/api/usuarios/${usuario.id}/remover-premium`, {
+                            method: 'PATCH'
+                        });
+
+                        if (!res.ok) {
+                            const errorData = await res.json();
+                            throw new Error(errorData.error || 'Falha ao cancelar a assinatura.');
+                        }
+
+                        window.showNotification('Sua assinatura Premium foi cancelada', 'success');
+                        await checkPremiumStatus(); // Refresh buttons
+
+                    } catch (error) {
+                        console.error('Erro ao cancelar premium:', error);
+                        window.showNotification(`Falha ao cancelar: ${error.message}`, 'error');
+                    }
+                }
+            }
+
+            function closeModal(modal) {
+                if (modal == null) return;
+                const backdrop = document.getElementById('modalBackdrop');
+                if (backdrop) backdrop.classList.remove("show");
+                modal.classList.remove("show");
+            }
+
+            selectPlanBtns.forEach(btn => btn.addEventListener('click', becomePremium));
+            cancelPremiumBtn.addEventListener('click', cancelPremium);
+
+            // Initial Load
+            initializeProfilePage();
+        });
+    </script>
+</body>
+</html>

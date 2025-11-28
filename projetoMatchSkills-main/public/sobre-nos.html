@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Nós - Match Skills</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <a id="topo"></a>
+    <nav class="navbar">
+        <div class="container">
+            <a href="/home"><img src="img/logomatchskills1.svg" alt="Match Skills Logo" class="logo"></a>
+            <!-- Links para Candidatos / Não Logado -->
+            <ul id="nav-links-default" class="nav-links">
+                <li><a href="/">Início</a></li>
+                <li><a href="/buscar-vagas">Buscar Vagas</a></li>
+                <li><a href="/buscar-empresas">Buscar Empresas</a></li>
+                <li><a href="/sobre-nos">Sobre Nós</a></li>
+            </ul>
+            <!-- Links para Empresas (escondido por padrão) -->
+            <ul id="nav-links-empresa" class="nav-links" style="display: none;">
+                <li><a href="/home">Início</a></li>
+                <li><a href="/minhas-vagas">Minhas Vagas</a></li>
+                <li><a href="/sobre-nos">Sobre Nós</a></li>
+            </ul>
+            <!-- Estado Padrão: Não Logado -->
+            <div id="nav-user-default" class="nav-user bigger-column-gap">
+                <a href="/login" class="btn btn-secondary">Login</a>
+                <a href="/cadastro" class="btn btn-primary">Cadastre-se</a>
+            </div>
+            <!-- Estado Logado (escondido por padrão) -->
+            <div id="nav-user-logged" class="nav-user" style="display: none;">
+                <a href="/perfil"><img src="/img/fotos-perfil/candidato-sem-foto.png" alt="Foto de Perfil" class="profile-pic"></a>
+                <a href="#" class="logout-btn">Sair</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="container">
+            <h1 class="page-title">Sobre a Match Skills</h1>
+            <p class="page-subtitle">Conectando talentos e oportunidades através de um match perfeito de habilidades.</p>
+
+            <div class="card no-translateY">
+                <h2>Nossa Missão</h2>
+                <p>Nossa missão é revolucionar o processo de recrutamento, tornando-o mais justo, eficiente e transparente. Acreditamos que o sucesso de uma contratação vai além do currículo tradicional. Focamos no que realmente importa: as competências e o potencial de cada indivíduo.</p>
+            </div>
+
+            <div class="card no-translateY bigger-spacing">
+                <h2>Como Funciona</h2>
+                <p>Utilizamos uma abordagem centrada em habilidades (skills-first) para conectar profissionais e empresas.</p>
+                <ul>
+                    <li><strong>Para Candidatos:</strong> Você cadastra suas habilidades técnicas (hard skills) e comportamentais (soft skills). Nossa plataforma busca e recomenda as vagas que mais se alinham ao seu perfil, aumentando suas chances de encontrar o trabalho ideal.</li>
+                    <li><strong>Para Empresas:</strong> Publique suas vagas especificando as competências essenciais e as diferenciais. Nosso sistema apresenta os candidatos mais compatíveis, otimizando seu tempo e garantindo uma seleção de talentos mais precisa.</li>
+                </ul>
+            </div>
+
+            <div class="card no-translateY bigger-spacing">
+                <h2>Nossos Valores</h2>
+                <div class="values-grid">
+                    <div class="value-item">
+                        <h4>Transparência</h4>
+                        <p>Processos claros tanto para empresas quanto para candidatos.</p>
+                    </div>
+                    <div class="value-item">
+                        <h4>Eficiência</h4>
+                        <p>Otimizamos o tempo de todos, focando em conexões de qualidade.</p>
+                    </div>
+                    <div class="value-item">
+                        <h4>Inovação</h4>
+                        <p>Buscamos constantemente novas formas de melhorar a experiência de recrutamento.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card no-translateY">
+                <h2>O Time</h2>
+                <p>Somos um grupo de entusiastas de tecnologia e recursos humanos dedicados a construir a ponte entre talento e oportunidade.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <a href="/home"><img src="img/logomatchskills1.svg" alt="Match Skills Logo" class="logo"></a>
+            <ul class="footer-links">
+                <li><a href="/sobre-nos">Sobre Nós</a></li>
+                <li><a id="footer-profile-link" href="/login">Meu Perfil</a></li>
+                <li><a href="/home">Início</a></li>
+                <li><a href="#topo">Voltar ao Topo</a></li>
+            </ul>
+        </div>
+    </footer>
+    
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Início - Match Skills</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <a id="topo"></a>
+    <nav class="navbar">
+        <div class="container">
+            <a href="/home"><img src="/img/logomatchskills1.svg" alt="Match Skills Logo" class="logo"></a>
+            <ul class="nav-links">
+                <li><a href="/home">Início</a></li>
+                <li><a href="/minhas-vagas">Minhas Vagas</a></li>
+                <li><a href="/sobre-nos">Sobre Nós</a></li>
+            </ul>
+            <!-- Estado Padrão: Não Logado -->
+            <div id="nav-user-default" class="nav-user bigger-column-gap" style="display: none;">
+                <a href="/login" class="btn btn-secondary">Login</a>
+                <a href="/cadastro" class="btn btn-primary">Cadastre-se</a>
+            </div>
+            <!-- Estado Logado (escondido por padrão) -->
+            <div id="nav-user-logged" class="nav-user">
+                <a href="/perfil"><img src="/img/fotos-perfil/empresa-sem-foto.png" alt="Foto de Perfil" class="profile-pic"></a>
+                <a href="#" class="logout-btn">Sair</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="container">
+            <h1 class="page-title">Bem-vinda, Empresa!</h1>
+            <p class="page-subtitle">Gerencie suas vagas e encontre os candidatos com as habilidades certas.</p>
+            <a href="/minhas-vagas" class="btn btn-primary">Ver minhas vagas publicadas</a>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <a href="/home"><img src="/img/logomatchskills1.svg" alt="Match Skills Logo" class="logo"></a>
+            <ul class="footer-links">
+                <li><a href="/sobre-nos">Sobre Nós</a></li>
+                <li><a id="footer-profile-link" href="/perfil">Meu Perfil</a></li>
+                <li><a href="/home">Início</a></li>
+                <li><a href="#topo">Voltar ao Topo</a></li>
+            </ul>
+        </div>
+    </footer>
+    
+    <script src="/js/main.js"></script>
+</body>
+</html>
